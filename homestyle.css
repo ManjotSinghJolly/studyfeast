@@ -82,3 +82,62 @@ body {
 .dishes h1 {
   text-align: center;
 }
+
+.cards {
+  margin: 30px;
+}
+.cards h1 {
+  text-align: center;
+}
+
+.dish-card {
+  background-color: #9a7b4f;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.top-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  padding: 20px;
+}
+
+.ratings {
+  display: flex;
+  gap: 10px;
+}
+
+.dish-name {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.price-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 30px;
+  font-size: 1.2rem;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid #463937;
+  color: #463937;
+  background-color: #9a7b4f;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
