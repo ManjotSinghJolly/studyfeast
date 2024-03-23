@@ -141,3 +141,13 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
+.quantity {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: red;
+}
+.cart {
+  display: flex;
+}
