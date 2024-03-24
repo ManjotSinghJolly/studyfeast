@@ -1,32 +1,60 @@
-//Selecting the add to cart buttons for different dishes
-const burgerButton = document.getElementById("burgerButton");
-const pizzaButton = document.getElementById("pizzaButton");
-const coffeeButton = document.getElementById("coffeeButton");
+let totalAmount = 0;
 
-//Declaring variables for quantities of each dish item
-let burgerQuantity = 0;
-let pizzaQuantity = 0;
-let coffeeQuantity = 0;
+function addToCart(itemName, price) {
+  const cartItems = document.getElementById("cart-items");
+  const li = document.createElement("li");
+  li.classList.add("cart-item");
+  li.textContent = `${itemName} - Rs.${price}`;
 
-//Selecting the quantity dot div
-const quantityDot = document.getElementById("quantityDot");
-quantityDot.classList.toggle("quantity", false);
+  // Store the item price as a data attribute of the li element
+  li.dataset.price = price;
 
-//Quantity of each dish becomes 1 when add to cart button is clicked
-burgerButton.addEventListener("click", function () {
-  burgerQuantity++;
-  quantityDot.classList.toggle("quantity", true);
-  console.log(burgerQuantity);
-});
+  const quantitySpan = document.createElement("span");
+  quantitySpan.textContent = "Quantity: 1";
+  quantitySpan.classList.add("quantity");
+  li.appendChild(quantitySpan);
 
-pizzaButton.addEventListener("click", function () {
-  pizzaQuantity++;
-  quantityDot.classList.toggle("quantity", true);
-  console.log(pizzaQuantity);
-});
+  const increaseButton = document.createElement("button");
+  increaseButton.textContent = "+";
+  increaseButton.onclick = function () {
+    let quantity = parseInt(quantitySpan.textContent.split(": ")[1]);
+    quantity++;
+    quantitySpan.textContent = "Quantity: " + quantity;
+    totalAmount += price;
+    updateTotalDisplay();
+  };
+  li.appendChild(increaseButton);
 
-coffeeButton.addEventListener("click", function () {
-  coffeeQuantity++;
-  quantityDot.classList.toggle("quantity", true);
-  console.log(coffeeQuantity);
-});
+  const decreaseButton = document.createElement("button");
+  decreaseButton.textContent = "-";
+  decreaseButton.onclick = function () {
+    let quantity = parseInt(quantitySpan.textContent.split(": ")[1]);
+    if (quantity > 1) {
+      quantity--;
+      quantitySpan.textContent = "Quantity: " + quantity;
+      totalAmount -= price;
+      updateTotalDisplay();
+    }
+  };
+  li.appendChild(decreaseButton);
+
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "Remove Item";
+  removeButton.onclick = function () {
+    const itemPrice = parseInt(li.dataset.price);
+    totalAmount -=
+      itemPrice * parseInt(quantitySpan.textContent.split(": ")[1]);
+    updateTotalDisplay();
+    li.remove();
+  };
+  li.appendChild(removeButton);
+
+  cartItems.appendChild(li);
+  totalAmount += price;
+  updateTotalDisplay();
+}
+
+function updateTotalDisplay() {
+  const totalDisplay = document.getElementById("total-display");
+  totalDisplay.textContent = "Total: Rs." + totalAmount;
+}
